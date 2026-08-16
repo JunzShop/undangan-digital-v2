@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Undangan Ku</title>
+    <meta name="description" content="Admin panel untuk membuat dan mengelola undangan digital">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/JunzShop/undangan-digital@main/css/admin.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- REGISTER PAGE -->
+    <div id="registerPage" class="auth-page">
+        <div class="auth-container">
+            <div class="auth-header">
+                <div class="logo">
+                    <span class="logo-icon">💌</span>
+                    <span class="logo-text">Undangan Ku</span>
+                </div>
+                <h1>Buat Akun Gratis</h1>
+                <p>Mulai buat undangan digital cantik dalam 5 menit!</p>
+            </div>
+            <form id="registerForm" class="auth-form">
+                <div class="form-group">
+                    <label for="regName">Nama Lengkap</label>
+                    <input type="text" id="regName" name="name" required placeholder="Masukkan nama lengkap">
+                </div>
+                <div class="form-group">
+                    <label for="regEmail">Email</label>
+                    <input type="email" id="regEmail" name="email" required placeholder="contoh@email.com">
+                </div>
+                <div class="form-group">
+                    <label for="regPassword">Password</label>
+                    <input type="password" id="regPassword" name="password" required placeholder="Minimal 6 karakter" minlength="6">
+                </div>
+                <div class="form-group">
+                    <label for="regConfirmPassword">Konfirmasi Password</label>
+                    <input type="password" id="regConfirmPassword" name="confirmPassword" required placeholder="Ulangi password">
+                </div>
+                <button type="submit" class="btn btn-primary btn-large">Daftar Sekarang</button>
+                <p class="auth-footer">
+                    Sudah punya akun? <a href="#" id="showLogin">Login di sini</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- LOGIN PAGE -->
+    <div id="loginPage" class="auth-page" style="display: none;">
+        <div class="auth-container">
+            <div class="auth-header">
+                <div class="logo">
+                    <span class="logo-icon">💌</span>
+                    <span class="logo-text">Undangan Ku</span>
+                </div>
+                <h1>Login ke Akun Anda</h1>
+                <p>Selamat datang kembali!</p>
+            </div>
+            <form id="loginForm" class="auth-form">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" name="email" required placeholder="contoh@email.com">
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" name="password" required placeholder="Masukkan password">
+                </div>
+                <button type="submit" class="btn btn-primary btn-large">Login</button>
+                <p class="auth-footer">
+                    Belum punya akun? <a href="#" id="showRegister">Daftar gratis</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div id="dashboardPage" class="dashboard-page" style="display: none;">
+        <!-- Header -->
+        <header class="dashboard-header">
+            <div class="container">
+                <div class="header-content">
+                    <div class="logo">
+                        <span class="logo-icon">💌</span>
+                        <span class="logo-text">Undangan Ku</span>
+                    </div>
+                    <div class="user-menu">
+                        <span class="user-name" id="userName">User</span>
+                        <button class="btn btn-outline btn-small" id="logoutBtn">Logout</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="dashboard-content">
+            <div class="container">
+                <!-- Welcome Section -->
+                <div class="welcome-section">
+                    <h1>Halo, <span id="welcomeName">User</span>! 👋</h1>
+                    <p>Selamat datang di dashboard Undangan Ku. Mulai buat undangan digital cantik sekarang!</p>
+                    <button class="btn btn-primary btn-large" id="createInvitationBtn">
+                        <span class="btn-icon">➕</span>
+                        Buat Undangan Baru
+                    </button>
+                </div>
+
+                <!-- Stats Section -->
+                <div class="stats-section">
+                    <div class="stat-card">
+                        <div class="stat-icon">📄</div>
+                        <div class="stat-info">
+                            <div class="stat-number" id="totalInvitations">0</div>
+                            <div class="stat-label">Total Undangan</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">👁️</div>
+                        <div class="stat-info">
+                            <div class="stat-number" id="totalViews">0</div>
+                            <div class="stat-label">Total Views</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">✅</div>
+                        <div class="stat-info">
+                            <div class="stat-number" id="totalRSVPs">0</div>
+                            <div class="stat-label">Total RSVP</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Invitations List -->
+                <div class="invitations-section">
+                    <h2>Undangan Saya</h2>
+                    <div id="invitationsList" class="invitations-grid">
+                        <!-- Invitations will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CREATE INVITATION PAGE -->
+    <div id="createInvitationPage" class="create-page" style="display: none;">
+        <!-- Header -->
+        <header class="dashboard-header">
+            <div class="container">
+                <div class="header-content">
+                    <button class="btn btn-outline btn-small" id="backToDashboardBtn">
+                        <span class="btn-icon">←</span>
+                        Kembali
+                    </button>
+                    <div class="logo">
+                        <span class="logo-icon">💌</span>
+                        <span class="logo-text">Undangan Ku</span>
+                    </div>
+                    <div class="header-actions">
+                        <button class="btn btn-outline btn-small" id="previewBtn">Preview</button>
+                        <button class="btn btn-primary btn-small" id="publishBtn">Publish</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Steps Indicator -->
+        <div class="steps-indicator">
+            <div class="container">
+                <div class="steps">
+                    <div class="step active" data-step="1">
+                        <div class="step-number">1</div>
+                        <div class="step-label">Template</div>
+                    </div>
+                    <div class="step" data-step="2">
+                        <div class="step-number">2</div>
+                        <div class="step-label">Foto</div>
+                    </div>
+                    <div class="step" data-step="3">
+                        <div class="step-number">3</div>
+                        <div class="step-label">Konten</div>
+                    </div>
+                    <div class="step" data-step="4">
+                        <div class="step-number">4</div>
+                        <div class="step-label">Customize</div>
+                    </div>
+                    <div class="step" data-step="5">
+                        <div class="step-number">5</div>
+                        <div class="step-label">Preview</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step Content -->
+        <div class="create-content">
+            <div class="container">
+                <!-- Step 1: Choose Template -->
+                <div id="step1" class="step-content active">
+                    <h2>Pilih Template Undangan</h2>
+                    <p>Pilih template yang sesuai dengan acara Anda</p>
+                    
+                    <!-- Template Filter -->
+                    <div class="template-filter">
+                        <button class="filter-btn active" data-filter="all">Semua</button>
+                        <button class="filter-btn" data-filter="wedding">💍 Pernikahan</button>
+                        <button class="filter-btn" data-filter="birthday">🎂 Ulang Tahun</button>
+                        <button class="filter-btn" data-filter="aqiqah">👶 Aqiqah</button>
+                        <button class="filter-btn" data-filter="engagement">💍 Engagement</button>
+                        <button class="filter-btn" data-filter="other">🎉 Lainnya</button>
+                    </div>
+
+                    <!-- Template Grid -->
+                    <div id="templatesGrid" class="templates-grid">
+                        <!-- Templates will be loaded here -->
+                    </div>
+
+                    <div class="step-actions">
+                        <button class="btn btn-primary btn-large" id="nextStep1">
+                            Lanjut: Upload Foto
+                            <span class="btn-icon">→</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 2: Upload Photos -->
+                <div id="step2" class="step-content">
+                    <h2>Upload Foto</h2>
+                    <p>Upload foto terbaik Anda untuk undangan</p>
+
+                    <!-- Hero Image -->
+                    <div class="upload-section">
+                        <h3>Foto Utama (Hero Image)</h3>
+                        <p class="upload-hint">Foto ini akan ditampilkan di bagian atas undangan. Recommended size: 1080x1350 px</p>
+                        <div class="upload-area" id="heroUploadArea">
+                            <div class="upload-placeholder">
+                                <div class="upload-icon">📷</div>
+                                <p>Klik atau drag foto ke sini</p>
+                                <p class="upload-hint">JPG, PNG (Max 5MB)</p>
+                            </div>
+                            <input type="file" id="heroImageInput" accept="image/*" style="display: none;">
+                        </div>
+                        <div id="heroPreview" class="image-preview" style="display: none;">
+                            <img id="heroPreviewImg" src="" alt="Hero preview">
+                            <button class="btn-remove" id="removeHeroBtn">✕</button>
+                        </div>
+                    </div>
+
+                    <!-- Gallery -->
+                    <div class="upload-section">
+                        <h3>Gallery Foto (Optional)</h3>
+                        <p class="upload-hint">Upload sampai 10 foto untuk gallery. Recommended size: 1080x1080 px</p>
+                        <div class="upload-area" id="galleryUploadArea">
+                            <div class="upload-placeholder">
+                                <div class="upload-icon">🖼️</div>
+                                <p>Klik atau drag foto ke sini</p>
+                                <p class="upload-hint">JPG, PNG (Max 3MB per foto, max 10 foto)</p>
+                            </div>
+                            <input type="file" id="galleryImageInput" accept="image/*" multiple style="display: none;">
+                        </div>
+                        <div id="galleryPreview" class="gallery-grid">
+                            <!-- Gallery images will be added here -->
+                        </div>
+                    </div>
+
+                    <div class="step-actions">
+                        <button class="btn btn-outline btn-large" id="prevStep2">
+                            <span class="btn-icon">←</span>
+                            Kembali
+                        </button>
+                        <button class="btn btn-primary btn-large" id="nextStep2">
+                            Lanjut: Edit Konten
+                            <span class="btn-icon">→</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Edit Content -->
+                <div id="step3" class="step-content">
+                    <h2>Edit Konten Undangan</h2>
+                    <p>Isi detail acara Anda</p>
+
+                    <form id="contentForm">
+                        <!-- Event Type -->
+                        <div class="form-group">
+                            <label for="eventType">Jenis Acara</label>
+                            <select id="eventType" name="eventType" required>
+                                <option value="wedding">Pernikahan</option>
+                                <option value="birthday">Ulang Tahun</option>
+                                <option value="aqiqah">Aqiqah</option>
+                                <option value="engagement">Engagement</option>
+                                <option value="other">Lainnya</option>
+                            </select>
+                        </div>
+
+                        <!-- Names (for wedding/engagement) -->
+                        <div id="namesSection" class="form-section">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="groomName">Nama Mempelai Pria</label>
+                                    <input type="text" id="groomName" name="groomName" placeholder="John Doe">
+                                </div>
+                                <div class="form-group">
+                                    <label for="brideName">Nama Mempelai Wanita</label>
+                                    <input type="text" id="brideName" name="brideName" placeholder="Jane Smith">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Single Name (for birthday/aqiqah/other) -->
+                        <div id="singleNameSection" class="form-section" style="display: none;">
+                            <div class="form-group">
+                                <label for="personName">Nama</label>
+                                <input type="text" id="personName" name="personName" placeholder="Nama yang punya acara">
+                            </div>
+                        </div>
+
+                        <!-- Date & Time -->
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="eventDate">Tanggal Acara</label>
+                                <input type="date" id="eventDate" name="eventDate" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="eventTime">Waktu Acara</label>
+                                <input type="time" id="eventTime" name="eventTime" required>
+                            </div>
+                        </div>
+
+                        <!-- Venue -->
+                        <div class="form-group">
+                            <label for="venueName">Nama Tempat</label>
+                            <input type="text" id="venueName" name="venueName" required placeholder="Grand Ballroom, Hotel ABC">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="venueAddress">Alamat Lengkap</label>
+                            <textarea id="venueAddress" name="venueAddress" rows="3" required placeholder="Jl. Sudirman No. 123, Jakarta"></textarea>
+                        </div>
+
+                        <!-- Description -->
+                        <div class="form-group">
+                            <label for="eventDescription">Deskripsi/Cerita (Optional)</label>
+                            <textarea id="eventDescription" name="eventDescription" rows="5" placeholder="Ceritakan tentang acara Anda..."></textarea>
+                        </div>
+
+                        <!-- Contact Person -->
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="contactName">Nama Kontak Person</label>
+                                <input type="text" id="contactName" name="contactName" required placeholder="Budi Santoso">
+                            </div>
+                            <div class="form-group">
+                                <label for="contactPhone">No. WhatsApp</label>
+                                <input type="tel" id="contactPhone" name="contactPhone" required placeholder="081234567890">
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="step-actions">
+                        <button class="btn btn-outline btn-large" id="prevStep3">
+                            <span class="btn-icon">←</span>
+                            Kembali
+                        </button>
+                        <button class="btn btn-primary btn-large" id="nextStep3">
+                            Lanjut: Customize
+                            <span class="btn-icon">→</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 4: Customize -->
+                <div id="step4" class="step-content">
+                    <h2>Customize Undangan</h2>
+                    <p>Sesuaikan tampilan dan fitur undangan Anda</p>
+
+                    <!-- Color Theme -->
+                    <div class="customize-section">
+                        <h3>Warna Template (Optional)</h3>
+                        <div class="color-picker">
+                            <div class="color-option" data-color="#E91E63" style="background: #E91E63;"></div>
+                            <div class="color-option" data-color="#9C27B0" style="background: #9C27B0;"></div>
+                            <div class="color-option" data-color="#3F51B5" style="background: #3F51B5;"></div>
+                            <div class="color-option" data-color="#009688" style="background: #009688;"></div>
+                            <div class="color-option" data-color="#FF5722" style="background: #FF5722;"></div>
+                            <div class="color-option" data-color="#795548" style="background: #795548;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Music Background -->
+                    <div class="customize-section">
+                        <h3>Music Background (Optional)</h3>
+                        <div class="form-group">
+                            <label for="musicFile">Upload Music (MP3, Max 5MB)</label>
+                            <input type="file" id="musicFile" accept="audio/mp3,audio/mpeg">
+                            <div id="musicPreview" style="display: none;">
+                                <audio id="musicPlayer" controls></audio>
+                                <button class="btn btn-outline btn-small" id="removeMusicBtn">Hapus Music</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Features Toggle -->
+                    <div class="customize-section">
+                        <h3>Fitur Undangan</h3>
+                        <div class="toggle-group">
+                            <label class="toggle-item">
+                                <input type="checkbox" id="enableCountdown" checked>
+                                <span class="toggle-label">
+                                    <strong>Countdown Timer</strong>
+                                    <p>Tampilkan hitung mundur menuju hari H</p>
+                                </span>
+                            </label>
+                            <label class="toggle-item">
+                                <input type="checkbox" id="enableMaps" checked>
+                                <span class="toggle-label">
+                                    <strong>Google Maps</strong>
+                                    <p>Tampilkan peta lokasi acara</p>
+                                </span>
+                            </label>
+                            <label class="toggle-item">
+                                <input type="checkbox" id="enableRSVP" checked>
+                                <span class="toggle-label">
+                                    <strong>RSVP</strong>
+                                    <p>Izinkan tamu konfirmasi kehadiran</p>
+                                </span>
+                            </label>
+                            <label class="toggle-item">
+                                <input type="checkbox" id="enableGuestbook" checked>
+                                <span class="toggle-label">
+                                    <strong>Guest Book</strong>
+                                    <p>Izinkan tamu menulis ucapan</p>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="step-actions">
+                        <button class="btn btn-outline btn-large" id="prevStep4">
+                            <span class="btn-icon">←</span>
+                            Kembali
+                        </button>
+                        <button class="btn btn-primary btn-large" id="nextStep4">
+                            Lanjut: Preview
+                            <span class="btn-icon">→</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 5: Preview & Publish -->
+                <div id="step5" class="step-content">
+                    <h2>Preview & Publish</h2>
+                    <p>Preview undangan Anda sebelum publish</p>
+
+                    <!-- Preview Device Toggle -->
+                    <div class="preview-toggle">
+                        <button class="toggle-btn active" data-device="desktop">
+                            <span class="icon">💻</span>
+                            Desktop
+                        </button>
+                        <button class="toggle-btn" data-device="mobile">
+                            <span class="icon">📱</span>
+                            Mobile
+                        </button>
+                    </div>
+
+                    <!-- Preview Frame -->
+                    <div class="preview-frame">
+                        <iframe id="previewFrame" src="" frameborder="0"></iframe>
+                    </div>
+
+                    <div class="step-actions">
+                        <button class="btn btn-outline btn-large" id="prevStep5">
+                            <span class="btn-icon">←</span>
+                            Kembali
+                        </button>
+                        <button class="btn btn-primary btn-large" id="publishInvitationBtn">
+                            <span class="btn-icon">🚀</span>
+                            Publish Undangan
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="toast"></div>
+
+    <!-- MODAL -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Modal Title</h3>
+                <button class="modal-close" id="modalClose">✕</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Modal content will be loaded here -->
+            </div>
+            <div class="modal-footer" id="modalFooter">
+                <!-- Modal footer will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/gh/JunzShop/undangan-digital@main/js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undangan - Undangan Ku</title>
+    <meta name="description" content="Undangan digital cantik untuk acara spesial Anda">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/JunzShop/undangan-digital@main/css/invitation.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@300;400;500;600;700&family=Great+Vibes&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- LOADING SCREEN -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-icon">💌</div>
+            <h2>Memuat Undangan...</h2>
+            <div class="loading-spinner"></div>
+        </div>
+    </div>
+
+    <!-- INVITATION CONTENT -->
+    <div id="invitationContent" class="invitation-content" style="display: none;">
+        
+        <!-- HERO SECTION -->
+        <section class="hero-section">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <div class="hero-badge" id="eventBadge">The Wedding of</div>
+                <h1 class="hero-title" id="heroTitle">John & Jane</h1>
+                <div class="hero-date" id="heroDate">30 Januari 2027</div>
+                <div class="hero-venue" id="heroVenue">Grand Ballroom, Hotel ABC</div>
+                
+                <!-- Countdown Timer -->
+                <div class="countdown-container" id="countdownContainer">
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="days">00</div>
+                        <div class="countdown-label">Hari</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="hours">00</div>
+                        <div class="countdown-label">Jam</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="minutes">00</div>
+                        <div class="countdown-label">Menit</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="seconds">00</div>
+                        <div class="countdown-label">Detik</div>
+                    </div>
+                </div>
+                
+                <button class="btn btn-primary btn-large" onclick="scrollToSection('details')">
+                    Lihat Detail
+                    <span class="btn-icon">↓</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- COUPLE SECTION (for wedding/engagement) -->
+        <section class="couple-section" id="coupleSection">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Mempelai</h2>
+                    <p class="section-subtitle">Kami yang berbahagia</p>
+                </div>
+                <div class="couple-container">
+                    <div class="couple-card">
+                        <div class="couple-photo" id="groomPhoto">
+                            <img src="" alt="Groom" id="groomImg">
+                        </div>
+                        <h3 class="couple-name" id="groomName">John Doe</h3>
+                        <p class="couple-parents" id="groomParents">Putra dari<br>Bapak X & Ibu Y</p>
+                    </div>
+                    <div class="couple-divider">
+                        <span class="ampersand">&</span>
+                    </div>
+                    <div class="couple-card">
+                        <div class="couple-photo" id="bridePhoto">
+                            <img src="" alt="Bride" id="brideImg">
+                        </div>
+                        <h3 class="couple-name" id="brideName">Jane Smith</h3>
+                        <p class="couple-parents" id="brideParents">Putri dari<br>Bapak A & Ibu B</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EVENT DETAILS SECTION -->
+        <section class="details-section" id="details">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Detail Acara</h2>
+                    <p class="section-subtitle">Informasi lengkap tentang acara</p>
+                </div>
+                <div class="details-grid">
+                    <div class="detail-card">
+                        <div class="detail-icon">📅</div>
+                        <h3 class="detail-title">Tanggal & Waktu</h3>
+                        <p class="detail-content" id="eventDateTime">Sabtu, 30 Januari 2027<br>Pukul 10:00 WIB</p>
+                    </div>
+                    <div class="detail-card">
+                        <div class="detail-icon">📍</div>
+                        <h3 class="detail-title">Tempat</h3>
+                        <p class="detail-content" id="eventVenue">Grand Ballroom<br>Hotel ABC</p>
+                    </div>
+                    <div class="detail-card">
+                        <div class="detail-icon">📞</div>
+                        <h3 class="detail-title">Contact Person</h3>
+                        <p class="detail-content" id="eventContact">Budi Santoso<br>081234567890</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MAPS SECTION -->
+        <section class="maps-section" id="mapsSection">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Lokasi Acara</h2>
+                    <p class="section-subtitle">Petunjuk lokasi acara</p>
+                </div>
+                <div class="maps-container">
+                    <div class="maps-info">
+                        <h3 id="venueName">Grand Ballroom, Hotel ABC</h3>
+                        <p id="venueAddress">Jl. Sudirman No. 123, Jakarta</p>
+                        <a href="#" id="mapsLink" target="_blank" class="btn btn-primary">
+                            <span class="btn-icon">🗺️</span>
+                            Buka di Google Maps
+                        </a>
+                    </div>
+                    <div class="maps-embed">
+                        <iframe id="mapsFrame" src="" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- GALLERY SECTION -->
+        <section class="gallery-section" id="gallerySection">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Gallery</h2>
+                    <p class="section-subtitle">Momen-momen spesial kami</p>
+                </div>
+                <div class="gallery-grid" id="galleryGrid">
+                    <!-- Gallery images will be loaded here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- STORY SECTION (optional) -->
+        <section class="story-section" id="storySection">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Our Story</h2>
+                    <p class="section-subtitle">Perjalanan cinta kami</p>
+                </div>
+                <div class="story-content" id="storyContent">
+                    <!-- Story content will be loaded here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- RSVP SECTION -->
+        <section class="rsvp-section" id="rsvpSection">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Konfirmasi Kehadiran</h2>
+                    <p class="section-subtitle">Mohon konfirmasi kehadiran Anda</p>
+                </div>
+                <div class="rsvp-container">
+                    <form id="rsvpForm" class="rsvp-form">
+                        <div class="form-group">
+                            <label for="rsvpName">Nama Lengkap *</label>
+                            <input type="text" id="rsvpName" name="name" required placeholder="Masukkan nama lengkap">
+                        </div>
+                        <div class="form-group">
+                            <label for="rsvpAttendance">Konfirmasi Kehadiran *</label>
+                            <select id="rsvpAttendance" name="attendance" required>
+                                <option value="">Pilih konfirmasi</option>
+                                <option value="hadir">✅ Hadir</option>
+                                <option value="tidak">❌ Tidak Hadir</option>
+                                <option value="ragu">🤔 Masih Ragu</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="guestsGroup">
+                            <label for="rsvpGuests">Jumlah Tamu</label>
+                            <input type="number" id="rsvpGuests" name="guests" min="1" max="10" value="1" placeholder="1">
+                        </div>
+                        <div class="form-group">
+                            <label for="rsvpMessage">Pesan/Ucapan (Optional)</label>
+                            <textarea id="rsvpMessage" name="message" rows="4" placeholder="Tulis pesan atau ucapan Anda..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-large">
+                            Kirim Konfirmasi
+                            <span class="btn-icon">→</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- GUEST BOOK SECTION -->
+        <section class="guestbook-section" id="guestbookSection">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Buku Tamu</h2>
+                    <p class="section-subtitle">Ucapan dan doa dari para tamu</p>
+                </div>
+                <div class="guestbook-container">
+                    <div class="guestbook-stats">
+                        <div class="stat-item">
+                            <div class="stat-number" id="totalMessages">0</div>
+                            <div class="stat-label">Ucapan</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" id="totalAttend">0</div>
+                            <div class="stat-label">Hadir</div>
+                        </div>
+                    </div>
+                    <div class="guestbook-list" id="guestbookList">
+                        <!-- Messages will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SHARE SECTION -->
+        <section class="share-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Bagikan Undangan</h2>
+                    <p class="section-subtitle">Share undangan ini ke teman dan keluarga</p>
+                </div>
+                <div class="share-buttons">
+                    <button class="share-btn whatsapp" onclick="shareWhatsApp()">
+                        <span class="share-icon">💬</span>
+                        <span>WhatsApp</span>
+                    </button>
+                    <button class="share-btn facebook" onclick="shareFacebook()">
+                        <span class="share-icon">📘</span>
+                        <span>Facebook</span>
+                    </button>
+                    <button class="share-btn twitter" onclick="shareTwitter()">
+                        <span class="share-icon">🐦</span>
+                        <span>Twitter</span>
+                    </button>
+                    <button class="share-btn copy" onclick="copyLink()">
+                        <span class="share-icon">📋</span>
+                        <span>Copy Link</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-logo">
+                        <span class="logo-icon">💌</span>
+                        <span class="logo-text">Undangan Ku</span>
+                    </div>
+                    <p class="footer-text">Made with ❤️ by Undangan Ku</p>
+                    <p class="footer-copyright">&copy; 2026 Undangan Ku. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+
+        <!-- MUSIC PLAYER (floating) -->
+        <div class="music-player" id="musicPlayer">
+            <button class="music-toggle" id="musicToggle" onclick="toggleMusic()">
+                <span class="music-icon" id="musicIcon">🎵</span>
+            </button>
+            <audio id="backgroundMusic" loop>
+                <source src="" type="audio/mpeg">
+            </audio>
+        </div>
+
+    </div>
+
+    <!-- LIGHTBOX (for gallery) -->
+    <div id="lightbox" class="lightbox">
+        <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+        <button class="lightbox-prev" onclick="prevImage()">‹</button>
+        <button class="lightbox-next" onclick="nextImage()">›</button>
+        <img id="lightboxImg" src="" alt="Gallery image">
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="toast"></div>
+
+    <script src="https://cdn.jsdelivr.net/gh/JunzShop/undangan-digital@main/js/invitation.js"></script>
+</body>
+</html>
